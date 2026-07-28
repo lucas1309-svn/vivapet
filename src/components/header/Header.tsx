@@ -1,5 +1,6 @@
 "use client"
 
+import "./Header.css"
 import Link from "next/link";
 
 export default function Header(){
@@ -14,6 +15,7 @@ export default function Header(){
                 
                 <div className="logo">
                     <Link href="/"> VivaPet </Link>
+                </div>
 
                     <nav className="menu">
 
@@ -60,8 +62,6 @@ export default function Header(){
                     <div className="donations">
                         <Link href="/doacoes">Doações</Link>
                     </div>
-
-                </div>
 
             </div>
 
