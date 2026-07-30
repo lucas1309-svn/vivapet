@@ -1,9 +1,10 @@
-export default function Checar(){
 
-    return(
+export default function Checar() {
+
+    return (
 
         <div>
-            <h1>Checar suprimentos</h1>
+            <h1> Checar suprimento </h1>
         </div>
-    )
+    );
 }

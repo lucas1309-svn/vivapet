@@ -1,0 +1,47 @@
+.acoes-rapidas {
+
+    margin-top: 40px;
+
+    background: #ffffff;
+
+    border: 1px solid var(--cor-borda);
+
+    border-radius: 8px;
+
+    padding: 25px;
+
+}
+
+.acoes-rapidas h2 {
+
+    color: var(--cor-principal);
+
+    margin-bottom: 20px;
+
+}
+
+.acoes-rapidas button {
+
+    margin-right: 15px;
+
+    margin-bottom: 15px;
+
+    padding: 12px 20px;
+
+    border: none;
+
+    border-radius: 5px;
+
+    background: var(--cor-principal);
+
+    color: #ffffff;
+
+    cursor: pointer;
+
+}
+
+.acoes-rapidas button:hover {
+
+    background: var(--cor-principal-hover);
+
+}

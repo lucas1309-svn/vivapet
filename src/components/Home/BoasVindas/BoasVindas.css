@@ -1,0 +1,19 @@
+.boas-vindas {
+
+    background-color: #fff;
+    padding: 30px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.boas-vindas h1 {
+    color: var(--cor-principal);
+    margin-bottom: 15px;
+}
+
+.boas-vindas p {
+
+    color: #555;
+    line-height: 1.6;
+}

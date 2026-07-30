@@ -1,36 +1,33 @@
 import Header from "@/components/Header/Header";
+import Footer from "@/components/Footer/Footer";
+import "./globals.css"
+
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  
-  return(
 
-    <html lang="">
-    <body>
-      
-    
-     <Header />
+  return (
 
-     {children}
+    <html lang="pt-BR">
+      <body>
 
+        <Header />
 
-    </body>
+        {children}
+
+        <Footer />
+
+      </body>
     </html>
 
-  )
+  );
 }
 
-
-
-
-
-
-
-
 /*
+
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -64,4 +61,5 @@ export default function RootLayout({
     </html>
   );
 }
-  */
+
+*/
