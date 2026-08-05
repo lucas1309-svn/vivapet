@@ -1,7 +1,7 @@
 
 import { Animal } from "../Animal/Animal"
 import { TipoCuidador } from "../Enums/Enums"
-import { RegistroUso } from "../RegistroUso.ts/RegistroUso"
+import { RegistroUso } from "../RegistroUso/RegistroUso"
 
 export class Cuidador{
 
