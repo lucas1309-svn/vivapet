@@ -9,6 +9,7 @@
     margin-top: 40px;
 }
 
+
 .footer-esquerda,
 .footer-centro,
 .footer-direita {
@@ -22,11 +23,13 @@
     margin-bottom: 10px;
 }
 
+
 .footer p {
 
     color: var(--cor-texto);
     line-height: 1.6;
 }
+
 
 .footer ul {
 
@@ -36,6 +39,7 @@
     margin: 0;
 }
 
+
 .footer li {
 
     margin-bottom: 8px;
@@ -43,11 +47,13 @@
     cursor: pointer;
 }
 
+
 .footer li:hover {
     color: var(--cor-principal);
 }
 
-.footer-copyright{
+
+.footer-copyright {
     margin-top: 48px;
     padding: 16px;
     background-color: var(--cor-principal);
@@ -55,6 +61,7 @@
     border-top: 1px solid #374151;
     text-align: center;
 }
+
 
 @media(max-width: 768px) {
 
@@ -70,4 +77,5 @@
     .footer-direita {
         text-align: center;
     }
+
 }

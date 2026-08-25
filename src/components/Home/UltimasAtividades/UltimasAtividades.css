@@ -2,7 +2,7 @@
 
     margin-top: 40px;
     background-color: #fff;
-    border: 1px, solid var(--cor-borda);
+    border: 1px solid var(--cor-borda);
     border-radius: 8px;
     padding: 25px;
 }
@@ -10,14 +10,15 @@
 .ultimas-atividades h2{
     color: var(--cor-principal);
     margin-bottom: 20px;
-
 }
+
 
 .ultimas-atividades ul{
+
     margin: 0;
     padding-left: 20px;
-
 }
+
 
 .ultimas-atividades li{
     margin-bottom: 12px;
