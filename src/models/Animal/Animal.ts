@@ -1,5 +1,6 @@
-import { TipoAnimal, SexoAnimal, StatusAnimal } from './enums'; // Ajuste o caminho
-import { Necessidade } from './Necessidade';
+import { SexoAnimal, StatusAnimal, TipoAnimal } from "../Enums/Enums";
+import { Necessidade } from "../Necessidade/Necessidade";
+
 
 export class Animal {
 

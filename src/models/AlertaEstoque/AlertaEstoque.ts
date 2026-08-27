@@ -1,35 +1,36 @@
-import { StatusAlerta } from './enums'; // Ajuste o caminho
+import { StatusAlerta } from "../Enums/Enums";
+
 
 export class AlertaEstoque {
 
 
-  private readonly _id: string;
-  private _dataAlerta: Date;
+  private readonly _id_alerta_estoque: number;
+  private _data_alerta: Date;
   private _mensagem: string;
   private _status: StatusAlerta;
-  private _suprimentoId: string;
+  private _id_suprimento: number;
 
 
-  constructor(id: string, dataAlerta: Date, mensagem: string, suprimentoId: string, status: StatusAlerta = StatusAlerta.ATIVO) {
-    this._id = id;
-    this._dataAlerta = dataAlerta;
+  constructor(id_alerta_estoque: number, data_alerta: Date, mensagem: string, id_suprimento: number, status: StatusAlerta = StatusAlerta.ATIVO) {
+    this._id_alerta_estoque = id_alerta_estoque;
+    this._data_alerta = data_alerta;
     this._mensagem = mensagem;
-    this._suprimentoId = suprimentoId;
+    this._id_suprimento = id_suprimento;
     this._status = status;
   }
 
 
-  public get id() {
-    return this._id;
+  public get id_alerta_estoque() {
+    return this._id_alerta_estoque;
   }
  
 
-  public get dataAlerta() {
-    return this._dataAlerta;
+  public get data_alerta() {
+    return this._data_alerta;
   }
 
-  public set dataAlerta(dataAlerta: Date) {
-    this._dataAlerta = dataAlerta;
+  public set data_alerta(data_alerta: Date) {
+    this._data_alerta = data_alerta;
   }
 
 
@@ -51,12 +52,12 @@ export class AlertaEstoque {
   }
 
 
-  public get suprimentoId() {
-    return this._suprimentoId;
+  public get id_suprimento() {
+    return this._id_suprimento;
   }
   
-  public set suprimentoId(suprimentoId: string) {
-    this._suprimentoId = suprimentoId;
+  public set id_suprimento(id_suprimento: number) {
+    this._id_suprimento = id_suprimento;
   }
 
 

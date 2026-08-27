@@ -1,28 +1,28 @@
 export class Suprimento {
 
 
-  private readonly _id: string;
+  private readonly _id_suprimento: number;
   private _nome: string;
   private _unidade: string;
-  private _quantidadeEstoque: number;
-  private _quantidadeMinima: number;
-  private _dataCadastro: Date;
+  private _quantidade_estoque: number;
+  private _quantidade_minima: number;
+  private _data_cadastro: Date;
   private _ativo: boolean;
 
 
-  constructor(id: string, nome: string, unidade: string, quantidadeEstoque: number, quantidadeMinima: number, dataCadastro: Date = new Date(), ativo: boolean = true) {
-    this._id = id;
+  constructor(id_suprimento: number, nome: string, unidade: string, quantidade_estoque: number, quantidade_minima: number, data_cadastro: Date = new Date(), ativo: boolean = true) {
+    this._id_suprimento = id_suprimento;
     this._nome = nome;
     this._unidade = unidade;
-    this._quantidadeEstoque = Math.floor(quantidadeEstoque);
-    this._quantidadeMinima = Math.floor(quantidadeMinima);
-    this._dataCadastro = dataCadastro;
+    this._quantidade_estoque = Math.floor(quantidade_estoque);
+    this._quantidade_minima = Math.floor(quantidade_minima);
+    this._data_cadastro = data_cadastro;
     this._ativo = ativo;
   }
 
 
-  public get id() {
-    return this._id;
+  public get id_suprimento() {
+    return this._id_suprimento;
   }
   
 
@@ -44,30 +44,30 @@ export class Suprimento {
   }
 
 
-  public get quantidadeEstoque() {
-    return this._quantidadeEstoque;
+  public get quantidade_estoque() {
+    return this._quantidade_estoque;
   }
 
-  public set quantidadeEstoque(quantidadeEstoque: number) { 
-    this._quantidadeEstoque = Math.floor(quantidadeEstoque); 
-  }
-
-
-  public get quantidadeMinima() {
-    return this._quantidadeMinima;
-  }
-
-  public set quantidadeMinima(quantidadeMinima: number) { 
-    this._quantidadeMinima = Math.floor(quantidadeMinima); 
+  public set quantidade_estoque(quantidade_estoque: number) { 
+    this._quantidade_estoque = Math.floor(quantidade_estoque); 
   }
 
 
-  public get dataCadastro() {
-    return this._dataCadastro;
+  public get quantidade_minima() {
+    return this._quantidade_minima;
   }
 
-  public set dataCadastro(dataCadastro: Date) {
-    this._dataCadastro = dataCadastro;
+  public set quantidade_minima(quantidade_minima: number) { 
+    this._quantidade_minima = Math.floor(quantidade_minima); 
+  }
+
+
+  public get data_cadastro() {
+    return this._data_cadastro;
+  }
+
+  public set data_cadastro(data_cadastro: Date) {
+    this._data_cadastro = data_cadastro;
   }
 
 
@@ -83,10 +83,10 @@ export class Suprimento {
 
   // Métodos de Negócio
   public nivelEstoque() {
-    return this._quantidadeEstoque;
+    return this._quantidade_estoque;
   }
 
   public precisaReposicao(): boolean {
-    return this._quantidadeEstoque < this._quantidadeMinima;
+    return this._quantidade_estoque < this._quantidade_minima;
   }
 }
