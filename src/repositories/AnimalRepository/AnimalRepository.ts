@@ -17,7 +17,7 @@ export class AnimalRepository {
     }
 
 
-    
+
     public async buscarPorId(id_animal: number) {
 
         const query = `SELECT * FROM animal WHERE id_animal = $1`;
@@ -43,5 +43,22 @@ export class AnimalRepository {
 
         await db.query(query, values);
     }
+
+
+
+
+    // METODO EXTRA: listar todos os animais vinculados ao cuidador especifico
+
+
+    public async listarAnimaisPorCuidador(id_cuidador: number) {
+
+        const query = `SELECT * FROM animal WHERE cuidador_id = $1 ORDER BY id_animal`;
+
+        const { rows } = await db.query(query, [id_cuidador])
+
+        return rows.map(row => new Animal(row.id_animal, row.nome, row.tipo as TipoAnimal, row.raca, row.sexo as SexoAnimal, new Date(row.data_nascimento), new Date(row.data_entrada_abrigo), row.observacoes, row.status as StatusAnimal))
+    }
+
+
 
 }
