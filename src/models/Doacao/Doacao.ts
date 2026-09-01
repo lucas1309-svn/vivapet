@@ -4,33 +4,33 @@ import { ItemDoacao } from "../ItemDoacao/ItemDoacao";
 export class Doacao {
 
 
-  private readonly _id: string;
-  private _dataDoacao: Date;
+  private readonly _id_doacao: number;
+  private _data_doacao: Date;
   private _observacoes: string;
-  private _doadorId: string;
+  private _id_doador: number;
   private _itens: ItemDoacao[];
 
 
-  constructor(id: string, dataDoacao: Date, doadorId: string, itens: ItemDoacao[], observacoes: string = '') {
-    this._id = id;
-    this._dataDoacao = dataDoacao;
-    this._doadorId = doadorId;
+  constructor(id_doacao: number, data_doacao: Date, id_doador: number, itens: ItemDoacao[], observacoes: string = '') {
+    this._id_doacao = id_doacao;
+    this._data_doacao = data_doacao;
+    this._id_doador = id_doador;
     this._itens = itens;
     this._observacoes = observacoes;
   }
 
 
   public get id() {
-    return this._id;
+    return this._id_doacao;
   }
   
 
-  public get dataDoacao() {
-    return this._dataDoacao;
+  public get data_doacao() {
+    return this._data_doacao;
   }
 
-  public set dataDoacao(dataDoacao: Date) {
-    this._dataDoacao = dataDoacao;
+  public set data_doacao(data_doacao: Date) {
+    this._data_doacao = data_doacao;
   }
 
 
@@ -43,12 +43,12 @@ export class Doacao {
   }
 
 
-  public get doadorId() {
-    return this._doadorId;
+  public get id_doador() {
+    return this._id_doador;
   }
 
-  public set doadorId(doadorId: string) {
-    this._doadorId = doadorId;
+  public set id_doador(id_doador: number) {
+    this._id_doador = id_doador;
   }
 
 

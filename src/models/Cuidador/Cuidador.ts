@@ -4,37 +4,35 @@ import { Animal } from "../Animal/Animal";
 export class Cuidador {
 
 
-  private readonly _id: string;
+  private readonly _id_cuidador: number;
   private _nome: string;
   private _cpf: string;
-  private _telefone: string;
   private _email: string;
   private _data_cadastro: Date;
   private _ativo: boolean;
-  private _animaisSobResponsabilidade: Animal[];
+  private _animais_sob_responsabilidade: Animal[];
 
 
-  constructor(id: string, nome: string, cpf: string, telefone: string, email: string, data_cadastro: Date = new Date(), ativo: boolean = true) {
-    this._id = id;
+  constructor(id_cuidador: number, nome: string, cpf: string, email: string, data_cadastro: Date = new Date(), ativo: boolean = true) {
+    this._id_cuidador = id_cuidador;
     this._nome = nome;
     this._cpf = cpf;
-    this._telefone = telefone;
     this._email = email;
     this._data_cadastro = data_cadastro;
     this._ativo = ativo;
-    this._animaisSobResponsabilidade = [];
+    this._animais_sob_responsabilidade = [];
   }
 
 
-  public get id() {
-    return this._id;
+  public get id_cuidador() {
+    return this._id_cuidador;
   }
 
-  
+
   public get nome() {
     return this._nome;
   }
-  
+
   public set nome(nome: string) {
     this._nome = nome;
   }
@@ -46,15 +44,6 @@ export class Cuidador {
 
   public set cpf(cpf: string) {
     this._cpf = cpf;
-  }
-
-
-  public get telefone() {
-    return this._telefone;
-  }
-
-  public set telefone(telefone: string) {
-    this._telefone = telefone;
   }
 
 
@@ -85,29 +74,29 @@ export class Cuidador {
   }
 
 
-  public get animaisSobResponsabilidade() {
-    return this._animaisSobResponsabilidade;
+  public get animais_sob_responsabilidade() {
+    return this._animais_sob_responsabilidade;
   }
 
-  public set animaisSobResponsabilidade(animais: Animal[]) {
-    this._animaisSobResponsabilidade = animais;
+  public set animais_sob_responsabilidade(animais: Animal[]) {
+    this._animais_sob_responsabilidade = animais;
   }
 
 
 
   // Métodos de Negócio
-  public quantidadeAnimais() {
-    
-    return this._animaisSobResponsabilidade.length;
+  public quantidade_animais() {
+
+    return this._animais_sob_responsabilidade.length;
   }
 
 
   public adicionarAnimal(animal: Animal) {
 
-    if (this.quantidadeAnimais() >= 10) {
+    if (this.quantidade_animais() >= 10) {
       throw new Error('Um cuidador não pode ser responsável por mais de 10 animais.');
     }
 
-    this._animaisSobResponsabilidade.push(animal);
+    this._animais_sob_responsabilidade.push(animal);
   }
 }

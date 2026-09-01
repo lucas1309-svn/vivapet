@@ -23,14 +23,14 @@ export class AlertaEstoque {
   public get id_alerta_estoque() {
     return this._id_alerta_estoque;
   }
- 
+
 
   public get data_alerta() {
     return this._data_alerta;
   }
 
-  public set data_alerta(data_alerta: Date) {
-    this._data_alerta = data_alerta;
+  public set data_alerta(dataAlerta: Date) {
+    this._data_alerta = dataAlerta;
   }
 
 
@@ -46,7 +46,7 @@ export class AlertaEstoque {
   public get status() {
     return this._status;
   }
-  
+
   public set status(status: StatusAlerta) {
     this._status = status;
   }
@@ -55,7 +55,7 @@ export class AlertaEstoque {
   public get id_suprimento() {
     return this._id_suprimento;
   }
-  
+
   public set id_suprimento(id_suprimento: number) {
     this._id_suprimento = id_suprimento;
   }
@@ -66,5 +66,5 @@ export class AlertaEstoque {
   public marcarComoResolvido() {
     this._status = StatusAlerta.RESOLVIDO;
   }
-  
+
 }

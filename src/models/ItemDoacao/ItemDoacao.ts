@@ -1,24 +1,24 @@
 export class ItemDoacao {
 
 
-  private readonly _id: string;
+  private readonly _id_item_doacao: number;
   private _quantidade: number;
-  private _dataValidade: Date;
+  private _data_validade: Date;
   private _observacoes: string;
-  private _suprimentoId: string;
+  private _id_suprimento: number;
 
 
-  constructor(id: string, quantidade: number, dataValidade: Date, suprimentoId: string, observacoes: string = '') {
-    this._id = id;
+  constructor(id_item_doacao: number, quantidade: number, data_validade: Date, id_suprimento: number, observacoes: string = '') {
+    this._id_item_doacao = id_item_doacao;
     this._quantidade = Math.floor(quantidade);
-    this._dataValidade = dataValidade;
-    this._suprimentoId = suprimentoId;
+    this._data_validade = data_validade;
+    this._id_suprimento = id_suprimento;
     this._observacoes = observacoes;
   }
 
 
-  public get id() {
-    return this._id;
+  public get id_item_doacao() {
+    return this._id_item_doacao;
   }
   
 
@@ -31,12 +31,12 @@ export class ItemDoacao {
   }
 
 
-  public get dataValidade() {
-    return this._dataValidade;
+  public get data_validade() {
+    return this._data_validade;
   }
 
-  public set dataValidade(dataValidade: Date) {
-    this._dataValidade = dataValidade;
+  public set data_validade(data_validade: Date) {
+    this._data_validade = data_validade;
   }
 
 
@@ -49,11 +49,12 @@ export class ItemDoacao {
   }
 
 
-  public get suprimentoId() {
-    return this._suprimentoId;
+  public get id_suprimento() {
+    return this._id_suprimento;
   }
 
-  public set suprimentoId(suprimentoId: string) {
-    this._suprimentoId = suprimentoId;
+  public set id_suprimento(id_suprimento: number) {
+    this._id_suprimento = id_suprimento;
   }
+  
 }

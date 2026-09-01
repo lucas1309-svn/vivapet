@@ -1,38 +1,37 @@
 import { SexoAnimal, StatusAnimal, TipoAnimal } from "../Enums/Enums";
 import { Necessidade } from "../Necessidade/Necessidade";
 
-
 export class Animal {
 
 
-  private readonly _id: string;
+  private readonly _id_animal: number;
   private _nome: string;
   private _tipo: TipoAnimal;
   private _raca: string;
   private _sexo: SexoAnimal;
-  private _dataNascimento: Date;
-  private _dataEntradaAbrigo: Date;
+  private _data_nascimento: Date;
+  private _data_entrada_abrigo: Date;
   private _observacoes: string;
   private _status: StatusAnimal;
   private _necessidades: Necessidade[];
 
 
-  constructor(id: string, nome: string, tipo: TipoAnimal, raca: string, sexo: SexoAnimal, dataNascimento: Date, dataEntradaAbrigo: Date, observacoes: string = '',     status: StatusAnimal = StatusAnimal.ATIVO, necessidades: Necessidade[] = []) {
-    this._id = id;
+  constructor(id_animal: number, nome: string, tipo: TipoAnimal, raca: string, sexo: SexoAnimal, data_nascimento: Date, data_entrada_abrigo: Date, observacoes: string = '', status: StatusAnimal = StatusAnimal.ATIVO, necessidades: Necessidade[] = []) {
+    this._id_animal = id_animal;
     this._nome = nome;
     this._tipo = tipo;
     this._raca = raca;
     this._sexo = sexo;
-    this._dataNascimento = dataNascimento;
-    this._dataEntradaAbrigo = dataEntradaAbrigo;
+    this._data_nascimento = data_nascimento;
+    this._data_entrada_abrigo = data_entrada_abrigo;
     this._observacoes = observacoes;
     this._status = status;
     this._necessidades = necessidades;
   }
 
 
-  public get id() {
-    return this._id;
+  public get id_animal() {
+    return this._id_animal;
   }
   
   
@@ -72,21 +71,21 @@ export class Animal {
   }
 
   
-  public get dataNascimento() {
-    return this._dataNascimento;
+  public get data_nascimento() {
+    return this._data_nascimento;
   }
 
-  public set dataNascimento(dataNascimento: Date) {
-    this._dataNascimento = dataNascimento;
+  public set data_nascimento(data_nascimento: Date) {
+    this._data_nascimento = data_nascimento;
   }
 
   
-  public get dataEntradaAbrigo() {
-    return this._dataEntradaAbrigo;
+  public get data_entrada_abrigo() {
+    return this._data_entrada_abrigo;
   }
   
-  public set dataEntradaAbrigo(dataEntradaAbrigo: Date) {
-    this._dataEntradaAbrigo = dataEntradaAbrigo;
+  public set data_entrada_abrigo(data_entrada_abrigo: Date) {
+    this._data_entrada_abrigo = data_entrada_abrigo;
   }
 
 
@@ -121,10 +120,10 @@ export class Animal {
   // Métodos de Negócio
   public calcularIdade() {
     const hoje = new Date();
-    let idade = hoje.getFullYear() - this._dataNascimento.getFullYear();
-    const mes = hoje.getMonth() - this._dataNascimento.getMonth();
+    let idade = hoje.getFullYear() - this._data_nascimento.getFullYear();
+    const mes = hoje.getMonth() - this._data_nascimento.getMonth();
     
-    if (mes < 0 || (mes === 0 && hoje.getDate() < this._dataNascimento.getDate())) {
+    if (mes < 0 || (mes === 0 && hoje.getDate() < this._data_nascimento.getDate())) {
       idade--;
     }
     return idade;

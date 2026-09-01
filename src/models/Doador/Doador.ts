@@ -1,26 +1,22 @@
 export class Doador {
 
 
-  private readonly _id: string;
+  private readonly _id_doador: number;
   private _nome: string;
   private _cpf: string;
-  private _telefone: string;
   private _email: string;
-  private _endereco: string;
 
 
-  constructor(id: string, nome: string, cpf: string, telefone: string, email: string, endereco: string) {
-    this._id = id;
+  constructor(id_doador: number, nome: string, cpf: string, email: string) {
+    this._id_doador = id_doador;
     this._nome = nome;
     this._cpf = cpf;
-    this._telefone = telefone;
     this._email = email;
-    this._endereco = endereco;
   }
 
 
-  public get id() {
-    return this._id;
+  public get id_doador() {
+    return this._id_doador;
   }
   
 
@@ -42,15 +38,6 @@ export class Doador {
   }
 
 
-  public get telefone() {
-    return this._telefone;
-  }
-
-  public set telefone(telefone: string) {
-    this._telefone = telefone;
-  }
-
-
   public get email() {
     return this._email;
   }
@@ -59,12 +46,4 @@ export class Doador {
     this._email = email;
   }
 
-
-  public get endereco() {
-    return this._endereco;
-  }
-
-  public set endereco(endereco: string) {
-    this._endereco = endereco;
-  }
 }
