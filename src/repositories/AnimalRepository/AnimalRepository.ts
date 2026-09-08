@@ -7,10 +7,21 @@ export class AnimalRepository {
 
     public async salvar(animal: Animal, id_cuidador: number) {
 
-        const query = `INSERT INTO animal (nome, tipo, raca, sexo, data_nascimento, observacoes, status, data_entrada_abrigo, id_cuidador) 
+        const query = `INSERT INTO animal 
+        (nome, tipo, raca, sexo, data_nascimento, observacoes, status, data_entrada_abrigo, id_cuidador) 
         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`;
 
-        const values = [animal.nome, animal.tipo, animal.raca, animal.sexo, animal.data_nascimento, animal.observacoes, animal.status, animal.data_entrada_abrigo, id_cuidador];
+        const values = [
+            animal.nome,
+            animal.tipo,
+            animal.raca,
+            animal.sexo,
+            animal.data_nascimento,
+            animal.observacoes,
+            animal.status,
+            animal.data_entrada_abrigo,
+            id_cuidador
+        ];
 
         await db.query(query, values);
 
@@ -30,7 +41,17 @@ export class AnimalRepository {
 
         const row = rows[0];
 
-        return new Animal(row.id_animal, row.nome, row.tipo as TipoAnimal, row.raca, row.sexo as SexoAnimal, new Date(row.data_nascimento), new Date(row.data_entrada_abrigo), row.observacoes, row.status as StatusAnimal);
+        return new Animal(
+            row.id_animal,
+            row.nome,
+            row.tipo as TipoAnimal,
+            row.raca,
+            row.sexo as SexoAnimal,
+            new Date(row.data_nascimento),
+            new Date(row.data_entrada_abrigo),
+            row.observacoes,
+            row.status as StatusAnimal
+        );
     }
 
 
@@ -39,26 +60,41 @@ export class AnimalRepository {
 
         const query = `UPDATE cuidador SET nome = $2, tipo = $3, raca = $4, sexo = $5, data_nascimento = $6, observacoes = $7, status = $8, id_cuidador = $9 WHERE id_animal = $1`;
 
-        const values = [animal.id_animal, animal.nome, animal.tipo, animal.raca, animal.sexo, animal.data_nascimento, animal.observacoes, animal.status, id_cuidador];
+        const values = [
+            animal.id_animal,
+            animal.nome,
+            animal.tipo,
+            animal.raca,
+            animal.sexo,
+            animal.data_nascimento,
+            animal.observacoes,
+            animal.status,
+            id_cuidador
+        ];
 
         await db.query(query, values);
     }
 
 
 
+    // MÉTODO EXTRA: listar todos os animais vinculados a um cuidador específico
+    public async listarPorCuidador(id_cuidador: number) {
 
-    // METODO EXTRA: listar todos os animais vinculados ao cuidador especifico
+        const query = `SELECT * FROM animal WHERE id_cuidador = $1 ORDER BY id_animal`;
 
+        const { rows } = await db.query(query, [id_cuidador]);
 
-    public async listarAnimaisPorCuidador(id_cuidador: number) {
-
-        const query = `SELECT * FROM animal WHERE cuidador_id = $1 ORDER BY id_animal`;
-
-        const { rows } = await db.query(query, [id_cuidador])
-
-        return rows.map(row => new Animal(row.id_animal, row.nome, row.tipo as TipoAnimal, row.raca, row.sexo as SexoAnimal, new Date(row.data_nascimento), new Date(row.data_entrada_abrigo), row.observacoes, row.status as StatusAnimal))
+        return rows.map(row => new Animal(
+            row.id_animal,
+            row.nome,
+            row.tipo as TipoAnimal,
+            row.raca,
+            row.sexo as SexoAnimal,
+            new Date(row.data_nascimento),
+            new Date(row.data_entrada_abrigo),
+            row.observacoes,
+            row.status as StatusAnimal)
+        );
     }
-
-
 
 }

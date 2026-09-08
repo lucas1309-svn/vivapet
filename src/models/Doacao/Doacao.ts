@@ -20,7 +20,7 @@ export class Doacao {
   }
 
 
-  public get id() {
+  public get id_doacao() {
     return this._id_doacao;
   }
   
