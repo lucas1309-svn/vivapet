@@ -4,7 +4,7 @@ import { Animal } from "../Animal/Animal";
 export class Cuidador {
 
 
-  private readonly _id_cuidador: number;
+  private readonly _id_cuidador?: number;
   private _nome: string;
   private _cpf: string;
   private _email: string;
@@ -13,13 +13,14 @@ export class Cuidador {
   private _animais_sob_responsabilidade: Animal[];
 
 
-  constructor(id_cuidador: number, nome: string, cpf: string, email: string, data_cadastro: Date = new Date(), ativo: boolean = true) {
-    this._id_cuidador = id_cuidador;
+  constructor(nome: string, cpf: string, email: string, data_cadastro: Date = new Date(), ativo: boolean = true, id_cuidador?: number) {
     this._nome = nome;
     this._cpf = cpf;
     this._email = email;
     this._data_cadastro = data_cadastro;
     this._ativo = ativo;
+    this._id_cuidador = id_cuidador;
+    
     this._animais_sob_responsabilidade = [];
   }
 

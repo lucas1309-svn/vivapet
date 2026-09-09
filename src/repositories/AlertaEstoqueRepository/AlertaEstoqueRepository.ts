@@ -4,12 +4,12 @@ import { StatusAlerta } from "@/models/Enums/Enums";
 
 export class AlertaEstoqueRepository {
 
-
-    public async salvar(alerta: AlertaEstoque) {
-        const query = `INSERT INTO alerta_estoque 
-        (data_alerta, mensagem, status, suprimento_id) 
-        VALUES 
-        ($1, $2, $3, $4)`;
+    public async salvar(alerta: AlertaEstoque): Promise<AlertaEstoque> {
+        const query = `
+            INSERT INTO alerta_estoque (data_alerta, mensagem, status, id_suprimento) 
+            VALUES ($1, $2, $3, $4)
+            RETURNING id_alerta_estoque
+        `;
 
         const values = [
             alerta.data_alerta,
@@ -18,59 +18,63 @@ export class AlertaEstoqueRepository {
             alerta.id_suprimento
         ];
 
-        await db.query(query, values);
+        const { rows } = await db.query(query, values);
+
+        return new AlertaEstoque(
+            alerta.data_alerta,
+            alerta.mensagem,
+            alerta.id_suprimento,
+            alerta.status,
+            rows[0].id_alerta_estoque
+        );
     }
 
-
-
-    public async buscarPorId(id_alerta_estoque: number) {
-        const query = `SELECT * FROM alerta_estoque WHERE id = $1`;
+    public async buscarPorId(id_alerta_estoque: number): Promise<AlertaEstoque | null> {
+        const query = `SELECT * FROM alerta_estoque WHERE id_alerta_estoque = $1`;
         const { rows } = await db.query(query, [id_alerta_estoque]);
 
         if (rows.length === 0) {
-
             return null;
         }
 
         const row = rows[0];
 
+        // O ID passa a ser o último parâmetro da reconstrução
         return new AlertaEstoque(
-            row.id_alerta_estoque,
             new Date(row.data_alerta),
             row.mensagem,
             row.id_suprimento,
-            row.status as StatusAlerta // convertendo a string vindo do banco de dados para Enum (Cast)
+            row.status as StatusAlerta,
+            row.id_alerta_estoque
         );
     }
 
+    public async atualizar(alerta: AlertaEstoque): Promise<void> {
+        if (!alerta.id_alerta_estoque) {
+            throw new Error("Não é possível atualizar um alerta que não possui ID.");
+        }
 
-
-    //  Método útil para quando resolvermos o alerta (ex: chamar marcarComoResolvido())
-    public async atualizar(alerta: AlertaEstoque) {
-        const query = `UPDATE alerta_estoque SET status = $2, mensagem = $3 WHERE id = $1`;
+        const query = `UPDATE alerta_estoque SET status = $1, mensagem = $2 WHERE id_alerta_estoque = $3`;
 
         const values = [
-            alerta.id_alerta_estoque,
             alerta.status,
-            alerta.mensagem
+            alerta.mensagem,
+            alerta.id_alerta_estoque
         ];
 
         await db.query(query, values);
     }
 
-
-
-    // Busca todos os alertas ativos (que ainda não foram resolvidos)
-    public async listarAtivos() {
+    public async listarAtivos(): Promise<AlertaEstoque[]> {
         const query = `SELECT * FROM alerta_estoque WHERE status = 'ATIVO' ORDER BY data_alerta DESC`;
         const { rows } = await db.query(query);
 
         return rows.map(row => new AlertaEstoque(
-            row.id_alerta_estoque,
             new Date(row.data_alerta),
             row.mensagem,
             row.id_suprimento,
-            row.status as StatusAlerta
+            row.status as StatusAlerta,
+            row.id_alerta_estoque
         ));
     }
 }

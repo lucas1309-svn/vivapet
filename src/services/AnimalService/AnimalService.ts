@@ -18,7 +18,6 @@ export class AnimalService {
 
     // REGRA DE NEGÓCIO: O cuidador não pode ultrapassar 10 animais
     public async cadastrarAnimal(
-
         dados: {
             nome: string; tipo: TipoAnimal; raca: string; sexo: SexoAnimal;
             data_nascimento: Date; data_entrada_abrigo: Date; observacoes?: string;
@@ -32,15 +31,12 @@ export class AnimalService {
             throw new Error('Cuidador não encontrado.');
         }
 
-
         // PASSO 2 - Carrega os animais atuais do cuidador para aplicar a regra de limite
         const animaisAtuais = await this.animalRepository.listarPorCuidador(id_cuidador);
         cuidador.animais_sob_responsabilidade = animaisAtuais;
 
-
-        // PASSO 3 - Instancia o novo animal (gerando um UUID automático)
+        // PASSO 3 - Instancia o novo animal (sem passar ID, pois será gerado pelo banco)
         const novoAnimal = new Animal(
-            0,
             dados.nome,
             dados.tipo,
             dados.raca,
@@ -49,20 +45,17 @@ export class AnimalService {
             dados.data_entrada_abrigo,
             dados.observacoes || '',
             StatusAnimal.ATIVO
+            // As necessidades iniciam vazias e o id_animal é omitido (undefined)
         );
 
-
-        // PASSE 4 - A classe Cuidador valida a regra de negócio e lança erro se passar de 10
+        // PASSO 4 - A classe Cuidador valida a regra de negócio e lança erro se passar de 10
         cuidador.adicionarAnimal(novoAnimal);
 
+        // PASSO 5 - Salva no banco e captura a nova instância que contém o id_animal gerado
+        const animalSalvo = await this.animalRepository.salvar(novoAnimal, id_cuidador);
 
-        // PASSE 5 - Se passou pela validação, salva no banco de dados
-        await this.animalRepository.salvar(novoAnimal, id_cuidador);
-
-        return novoAnimal;
+        return animalSalvo; // Agora retorna o objeto com o ID definitivo
     }
-
-
 
     // REGRA DE NEGÓCIO: Trazer o animal com suas necessidades (Composição)
     public async buscarAnimalCompleto(id_animal: number) {
@@ -71,15 +64,12 @@ export class AnimalService {
             return null;
         }
 
-
         // Busca as necessidades e acopla ao objeto do animal
         const necessidades = await this.necessidadeRepository.listarPorAnimal(id_animal);
         animal.necessidades = necessidades;
 
         return animal;
     }
-
-
 
     public async atualizarStatus(id_animal: number, novoStatus: StatusAnimal, id_cuidador: number) {
 
@@ -96,4 +86,10 @@ export class AnimalService {
     public async listarPorCuidador(id_cuidador: number) {
         return this.animalRepository.listarPorCuidador(id_cuidador);
     }
+
+
+    public async listarTodos() {
+        return this.animalRepository.listarTodos();
+    }
+
 }

@@ -4,7 +4,7 @@ import { Necessidade } from "../Necessidade/Necessidade";
 export class Animal {
 
 
-  private readonly _id_animal: number;
+  private readonly _id_animal?: number;
   private _nome: string;
   private _tipo: TipoAnimal;
   private _raca: string;
@@ -16,8 +16,7 @@ export class Animal {
   private _necessidades: Necessidade[];
 
 
-  constructor(id_animal: number, nome: string, tipo: TipoAnimal, raca: string, sexo: SexoAnimal, data_nascimento: Date, data_entrada_abrigo: Date, observacoes: string = '', status: StatusAnimal = StatusAnimal.ATIVO, necessidades: Necessidade[] = []) {
-    this._id_animal = id_animal;
+  constructor(nome: string, tipo: TipoAnimal, raca: string, sexo: SexoAnimal, data_nascimento: Date, data_entrada_abrigo: Date, observacoes: string = '', status: StatusAnimal = StatusAnimal.ATIVO, necessidades: Necessidade[] = [], id_animal?: number) {
     this._nome = nome;
     this._tipo = tipo;
     this._raca = raca;
@@ -27,14 +26,15 @@ export class Animal {
     this._observacoes = observacoes;
     this._status = status;
     this._necessidades = necessidades;
+    this._id_animal = id_animal;
   }
 
 
   public get id_animal() {
     return this._id_animal;
   }
-  
-  
+
+
   public get nome() {
     return this._nome;
   }
@@ -56,7 +56,7 @@ export class Animal {
   public get raca() {
     return this._raca;
   }
-  
+
   public set raca(raca: string) {
     this._raca = raca;
   }
@@ -70,7 +70,7 @@ export class Animal {
     this._sexo = sexo;
   }
 
-  
+
   public get data_nascimento() {
     return this._data_nascimento;
   }
@@ -79,11 +79,11 @@ export class Animal {
     this._data_nascimento = data_nascimento;
   }
 
-  
+
   public get data_entrada_abrigo() {
     return this._data_entrada_abrigo;
   }
-  
+
   public set data_entrada_abrigo(data_entrada_abrigo: Date) {
     this._data_entrada_abrigo = data_entrada_abrigo;
   }
@@ -101,16 +101,16 @@ export class Animal {
   public get status() {
     return this._status;
   }
-  
+
   public set status(status: StatusAnimal) {
     this._status = status;
   }
 
-  
+
   public get necessidades() {
     return this._necessidades;
   }
-  
+
   public set necessidades(necessidades: Necessidade[]) {
     this._necessidades = necessidades;
   }
@@ -122,7 +122,7 @@ export class Animal {
     const hoje = new Date();
     let idade = hoje.getFullYear() - this._data_nascimento.getFullYear();
     const mes = hoje.getMonth() - this._data_nascimento.getMonth();
-    
+
     if (mes < 0 || (mes === 0 && hoje.getDate() < this._data_nascimento.getDate())) {
       idade--;
     }

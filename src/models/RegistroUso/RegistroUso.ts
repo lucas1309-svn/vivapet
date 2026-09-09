@@ -1,7 +1,7 @@
 export class RegistroUso {
 
 
-  private readonly _id_registro_uso: number;
+  private readonly _id_registro_uso?: number;
   private _data_uso: Date;
   private _quantidade_usada: number;
   private _observacoes: string;
@@ -10,21 +10,21 @@ export class RegistroUso {
   private _id_suprimento: number;
 
 
-  constructor(id_registro_uso: number, data_uso: Date, quantidade_usada: number, id_cuidador: number, id_animal: number, id_suprimento: number, observacoes: string = '') {
-    this._id_registro_uso = id_registro_uso;
+  constructor(data_uso: Date, quantidade_usada: number, id_cuidador: number, id_animal: number, id_suprimento: number, observacoes: string = '', id_registro_uso?: number) {
     this._data_uso = data_uso;
     this._quantidade_usada = Math.floor(quantidade_usada);
     this._id_cuidador = id_cuidador;
     this._id_animal = id_animal;
     this._id_suprimento = id_suprimento;
     this._observacoes = observacoes;
+    this._id_registro_uso = id_registro_uso;
   }
 
 
   public get id_registro_uso() {
     return this._id_registro_uso;
   }
-  
+
 
   public get data_uso() {
     return this._data_uso;
@@ -39,8 +39,8 @@ export class RegistroUso {
     return this._quantidade_usada;
   }
 
-  public set quantidade_usada(quantidade_usada: number) { 
-    this._quantidade_usada = Math.floor(quantidade_usada); 
+  public set quantidade_usada(quantidade_usada: number) {
+    this._quantidade_usada = Math.floor(quantidade_usada);
   }
 
 

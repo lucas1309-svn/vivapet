@@ -4,19 +4,19 @@ import { StatusAlerta } from "../Enums/Enums";
 export class AlertaEstoque {
 
 
-  private readonly _id_alerta_estoque: number;
+  private readonly _id_alerta_estoque?: number;
   private _data_alerta: Date;
   private _mensagem: string;
   private _status: StatusAlerta;
   private _id_suprimento: number;
 
 
-  constructor(id_alerta_estoque: number, data_alerta: Date, mensagem: string, id_suprimento: number, status: StatusAlerta = StatusAlerta.ATIVO) {
-    this._id_alerta_estoque = id_alerta_estoque;
+  constructor(data_alerta: Date, mensagem: string, id_suprimento: number, status: StatusAlerta = StatusAlerta.ATIVO, id_alerta_estoque?: number) {
     this._data_alerta = data_alerta;
     this._mensagem = mensagem;
     this._id_suprimento = id_suprimento;
     this._status = status;
+    this._id_alerta_estoque = id_alerta_estoque;
   }
 
 

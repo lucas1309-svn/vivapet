@@ -4,26 +4,26 @@ import { ItemDoacao } from "../ItemDoacao/ItemDoacao";
 export class Doacao {
 
 
-  private readonly _id_doacao: number;
+  private readonly _id_doacao?: number;
   private _data_doacao: Date;
   private _observacoes: string;
   private _id_doador: number;
   private _itens: ItemDoacao[];
 
 
-  constructor(id_doacao: number, data_doacao: Date, id_doador: number, itens: ItemDoacao[], observacoes: string = '') {
-    this._id_doacao = id_doacao;
+  constructor(data_doacao: Date, id_doador: number, itens: ItemDoacao[], observacoes: string = '', id_doacao?: number) {
     this._data_doacao = data_doacao;
     this._id_doador = id_doador;
     this._itens = itens;
     this._observacoes = observacoes;
+    this._id_doacao = id_doacao;
   }
 
 
   public get id_doacao() {
     return this._id_doacao;
   }
-  
+
 
   public get data_doacao() {
     return this._data_doacao;

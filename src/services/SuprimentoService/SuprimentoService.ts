@@ -17,9 +17,8 @@ export class SuprimentoService {
         quantidadeMinima: number;
     }) {
 
-        // Instancia o novo suprimento. O construtor já cuida do Math.floor para as quantidades.
+        // Instancia o novo suprimento sem o pseudo-ID. O construtor já cuida do Math.floor para as quantidades.
         const novoSuprimento = new Suprimento(
-            0,
             dados.nome,
             dados.unidade,
             dados.quantidadeEstoque,
@@ -28,37 +27,30 @@ export class SuprimentoService {
             true // ativo por padrão
         );
 
-        await this.suprimentoRepository.salvar(novoSuprimento);
+        // Captura a instância devolvida pelo Repository, que agora contém o ID gerado pelo banco
+        const suprimentoSalvo = await this.suprimentoRepository.salvar(novoSuprimento);
 
-        return novoSuprimento;
+        return suprimentoSalvo;
     }
-
-
 
     public async buscarPorId(id_suprimento: number) {
         return this.suprimentoRepository.buscarPorId(id_suprimento);
     }
 
-
-
     public async listar() {
         return this.suprimentoRepository.listar();
     }
-
-
 
     // Atualização restrita a dados cadastrais. 
     // A quantidade em estoque deve ser modificada via Doação (entrada) ou RegistroUso (saída).
     public async atualizarDadosCadastrais(
         id_suprimento: number,
-
         dados: {
             nome: string;
             unidade: string;
             quantidade_minima: number;
             ativo: boolean;
         }
-
     ) {
 
         const suprimento = await this.suprimentoRepository.buscarPorId(id_suprimento);

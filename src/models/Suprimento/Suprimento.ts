@@ -1,7 +1,7 @@
 export class Suprimento {
 
 
-  private readonly _id_suprimento: number;
+  private readonly _id_suprimento?: number;
   private _nome: string;
   private _unidade: string;
   private _quantidade_estoque: number;
@@ -10,21 +10,21 @@ export class Suprimento {
   private _ativo: boolean;
 
 
-  constructor(id_suprimento: number, nome: string, unidade: string, quantidade_estoque: number, quantidade_minima: number, data_cadastro: Date = new Date(), ativo: boolean = true) {
-    this._id_suprimento = id_suprimento;
+  constructor(nome: string, unidade: string, quantidade_estoque: number, quantidade_minima: number, data_cadastro: Date = new Date(), ativo: boolean = true, id_suprimento?: number) {
     this._nome = nome;
     this._unidade = unidade;
     this._quantidade_estoque = Math.floor(quantidade_estoque);
     this._quantidade_minima = Math.floor(quantidade_minima);
     this._data_cadastro = data_cadastro;
     this._ativo = ativo;
+    this._id_suprimento = id_suprimento;
   }
 
 
   public get id_suprimento() {
     return this._id_suprimento;
   }
-  
+
 
   public get nome() {
     return this._nome;
@@ -48,8 +48,8 @@ export class Suprimento {
     return this._quantidade_estoque;
   }
 
-  public set quantidade_estoque(quantidade_estoque: number) { 
-    this._quantidade_estoque = Math.floor(quantidade_estoque); 
+  public set quantidade_estoque(quantidade_estoque: number) {
+    this._quantidade_estoque = Math.floor(quantidade_estoque);
   }
 
 
@@ -57,8 +57,8 @@ export class Suprimento {
     return this._quantidade_minima;
   }
 
-  public set quantidade_minima(quantidade_minima: number) { 
-    this._quantidade_minima = Math.floor(quantidade_minima); 
+  public set quantidade_minima(quantidade_minima: number) {
+    this._quantidade_minima = Math.floor(quantidade_minima);
   }
 
 

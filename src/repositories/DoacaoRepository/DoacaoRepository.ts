@@ -3,27 +3,34 @@ import { Doacao } from "@/models/Doacao/Doacao";
 
 export class DoacaoRepository {
 
-    public async salvar(doacao: Doacao) {
-        const query = `INSERT INTO doacao 
-        (id_doacao, data_doacao, observacoes, doador_id) 
-        VALUES ($1, $2, $3, $4`;
+    public async salvar(doacao: Doacao): Promise<Doacao> {
+        const query = `
+            INSERT INTO doacao (data_doacao, observacoes, id_doador) 
+            VALUES ($1, $2, $3)
+            RETURNING id_doacao
+        `;
 
         const values = [
-            doacao.id_doacao,
             doacao.data_doacao,
             doacao.observacoes,
             doacao.id_doador
         ];
 
-        await db.query(query, values);
+        const { rows } = await db.query(query, values);
+
+        return new Doacao(
+            doacao.data_doacao,
+            doacao.id_doador,
+            doacao.itens, // Mantém o array de itens atual (provavelmente vazio na inserção inicial)
+            doacao.observacoes,
+            rows[0].id_doacao // ID gerado indo para o último parâmetro
+        );
     }
 
+    public async buscarPorId(id_doacao: number): Promise<Doacao | null> {
+        const query = `SELECT * FROM doacao WHERE id_doacao = $1`;
 
-
-    public async buscarPorId(id: number) {
-        const query = `SELECT * FROM doacao WHERE id = $1`;
-
-        const { rows } = await db.query(query, [id]);
+        const { rows } = await db.query(query, [id_doacao]);
 
         if (rows.length === 0) {
             return null;
@@ -31,31 +38,27 @@ export class DoacaoRepository {
 
         const row = rows[0];
 
-        // O array de Itens inicia vazio
+        // Respeitando a ordem do construtor: data, id_doador, itens, observacoes, id_doacao
         return new Doacao(
-            row.id_doacao,
             new Date(row.data_doacao),
             row.id_doador,
-            [],  // Array referente aos itens de doação 
-            row.observacoes
+            [],  // Array referente aos itens de doação inicia vazio
+            row.observacoes,
+            row.id_doacao
         );
     }
 
-
-
-    public async listarPorDoador(id_doador: number) {
-
-        const query = `SELECT * FROM doacao WHERE doador_id = $1 ORDER BY data_doacao DESC`;
+    public async listarPorDoador(id_doador: number): Promise<Doacao[]> {
+        const query = `SELECT * FROM doacao WHERE id_doador = $1 ORDER BY data_doacao DESC`;
 
         const { rows } = await db.query(query, [id_doador]);
 
         return rows.map(row => new Doacao(
-            row.id_doacao,
             new Date(row.data_doacao),
             row.id_doador,
-            [],
-            row.observacoes)
-        );
+            [], // Array inicia vazio
+            row.observacoes,
+            row.id_doacao
+        ));
     }
-
 }
