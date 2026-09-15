@@ -2,7 +2,7 @@ import { Pool } from "pg";
 
 // CONEXÃO COM A BASE DE DADOS
 export const db = new Pool({
-    user: process.env.BD_USER || 'postgres',
+    user: process.env.DB_USER || 'postgres',
     host: process.env.DB_HOST || 'localhost',
     database: process.env.DB_NAME || 'Vivapet',
     password: process.env.DB_PASSWORD || 'BemVindo!',
