@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import "./suprimento.css";
 
 interface Suprimento {
     id_suprimento: number;
@@ -164,6 +163,7 @@ export default function TelaSuprimento() {
                             required
                             min="0"
                             step="any"
+                            disabled={editandoId !== null} // Bloqueia o campo se estiver editando
                         />
                         <input
                             type="number"

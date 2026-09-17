@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import "./cuidador.css";
 
 interface Cuidador {
     id_cuidador: number;
@@ -12,15 +11,26 @@ interface Cuidador {
 }
 
 export default function TelaCuidador() {
+
+    // PREPARAÇÃO PARA O CONTROLE DOS CAMPOS DA TELA COM USESTATE
     const [nome, setNome] = useState("");
     const [cpf, setCpf] = useState("");
     const [email, setEmail] = useState("");
-    const [ativo, setAtivo] = useState(true); // Novo estado para o status
+
+    // STATUS PADRÃO PARA CUMPRIMENTO DA INTERFACE
+    const [ativo, setAtivo] = useState(true);
 
     const [editandoId, setEditandoId] = useState<number | null>(null);
-    const [cuidadores, setCuidadores] = useState<Cuidador[]>([]);
-    const [mensagem, setMensagem] = useState("");
 
+    // ARRAY RESPONSÁVEL PELA LISTAGEM NA TELA
+    const [cuidadores, setCuidadores] = useState<Cuidador[]>([]);
+
+    // MENSAGENS DE AVISO
+    const [mensagem, setMensagem] = useState(""); 
+
+
+
+    // FUNÇÃO QUE DISPARA MENSAGENS DE ALERTA NO TOPO DA TELA, PASSANDO O TEXTO DE AVISO COMO PARÂMETRO, CONTA 3 SEGUNDOS E APARA A MENSAGEM (ATRIBUINDO VALOR VAZIO "" ).
     const exibirMensagem = (texto: string) => {
         setMensagem(texto);
         setTimeout(() => {
@@ -28,27 +38,44 @@ export default function TelaCuidador() {
         }, 3000);
     };
 
-    const salvarCuidador = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setMensagem("Processando...");
 
+
+    // MÉTODO QUE SALVA OS DADOS DE UM CUIDADOR NO SISTEMA, SEJA POR INSERÇÃO DE NOVO REGISTRO OU POR ALTERAÇÃO EM UM REGISTRO JÁ EXISTENTE
+    const salvarCuidador = async (e: React.FormEvent) => {
+
+        // O PREVENT DEFAULT SEGURA A TELA SEM PRECISAR DE UM RECARREGAMENTO PELO SERVIDOR
+        e.preventDefault();
+        setMensagem("Processando..."); // PASSANDO A MENSAGEM QUE SUMIRÁ EM 3 SEGUNDOS
+
+
+        // A PARTIR DO ID, O SISTEMA SABE SE CHAMA A FUNÇÃO POST (PARA CRIAÇÃO DE UM NOVO CUIDADOR) OU PUT (PARA EDIÇÃO DE UM CUIDADOR EXISTENTE), POIS SÓ EXISTE ID SE JÁ EXISTIR REGISTRO NO BANCO DE DADOS!
         const method = editandoId ? "PUT" : "POST";
         const url = editandoId ? `/api/cuidadores/${editandoId}` : "/api/cuidadores";
 
-        // O payload de edição agora inclui o campo ativo
+
+        // FAZENDO O CARREGAMENTO DO CUIDADOR, VISANDO A EDIÇÃO EM MEMÓRIA DOS CAMPOS, INCLUINDO O CAMPO ATIVO
         const payload = editandoId
             ? { id_cuidador: editandoId, nome, cpf, email, ativo }
             : { nome, cpf, email };
 
+        
+        
+
+        // INÍCIO DO PROCESSAMENTO:
+
+
+
         try {
+
+            // UTILIZANDO OS MÉTODOS DA FETCH API NATIVA PARA GERAR AS REQUISIÇÕES JSON
             const res = await fetch(url, {
                 method: method,
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload),
+                body: JSON.stringify(payload), // CONVERTENDO OS DADOS DO OBJETO PARA TEXTO ATRAVÉS DO JSON
             });
 
             const text = await res.text();
-            const data = text ? JSON.parse(text) : {};
+            const data = text ? JSON.parse(text) : {}; // CONVERTENDO OS TEXTOS PARA OBJETOS ATRAVÉS DO JSON
 
             if (res.ok) {
                 exibirMensagem(editandoId ? "Cuidador atualizado com sucesso!" : "Cuidador cadastrado com sucesso!");
