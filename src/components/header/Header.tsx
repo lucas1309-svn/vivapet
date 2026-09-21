@@ -1,66 +1,60 @@
-"use client"
+"use client";
 
-import "./Header.css";
 import Link from "next/link";
+import "./Header.css";
 
 export default function Header() {
-
     return (
-
         <header className="header">
-
-
             <div className="header-container">
 
-
+                {/* LOGO ANIMADA */}
                 <div className="logo">
-                    <Link href="/"> VivaPet </Link>
+                    <Link href="/">
+                        🐾 VivaPet
+                    </Link>
                 </div>
 
-
+                {/* MENUS E SUBMENUS AGRUPADOS */}
                 <nav className="menu">
 
+                    {/* GRUPO 1: ABRIGO (Animais e Necessidades) */}
                     <div className="menu-item">
-                        <span>Animais</span>
-
+                        <span>Abrigo</span>
                         <div className="submenu">
-                            <Link href="/animais/cadastrar"> Cadastrar novo animal </Link>
-                            <Link href="/animais/necessidades"> Cadastrar necessidades do animal </Link>
+                            <Link href="/animais">Gestão de Animais</Link>
+                            <Link href="/necessidades">Prontuários e Necessidades</Link>
                         </div>
-
                     </div>
 
-
+                    {/* GRUPO 2: EQUIPE */}
                     <div className="menu-item">
-                        <span>Cuidadores</span>
-
+                        <span>Equipe</span>
                         <div className="submenu">
-                            <Link href="/cuidadores/cadastrar"> Cadastrar novo cuidador </Link>
-                            <Link href="/cuidadores/vincular"> Vincular cuidador </Link>
+                            <Link href="/cuidadores">Gestão de Cuidadores</Link>
                         </div>
-                        
                     </div>
 
-
+                    {/* GRUPO 3: ESTOQUE (Suprimentos, Doações e Consumo) */}
                     <div className="menu-item">
-                        <span>Suprimentos</span>
-
+                        <span>Estoque</span>
                         <div className="submenu">
-                            <Link href="/suprimentos/cadastrar"> Cadastrar novo suprimento </Link>
-                            <Link href="/suprimentos/checar"> Checar suprimento </Link>
+                            <Link href="/suprimentos">Lista de Suprimentos</Link>
+                            <Link href="/doacoes">Entrada (Receber Doações)</Link>
+                            <Link href="/registros-uso">Saída (Registrar Consumo)</Link>
                         </div>
-                        
                     </div>
 
                 </nav>
 
-
-                <div className="donations">
-                    <Link href="/doacoes"> Doações </Link>
+                {/* BOTÃO DE DESTAQUE DIREITO */}
+                <div className="menu-destaque">
+                    <Link href="/doacoes/historico">
+                        Listar doações
+                    </Link>
                 </div>
 
             </div>
-
         </header>
     );
 }

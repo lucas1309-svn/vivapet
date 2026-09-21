@@ -61,4 +61,17 @@ export class DoacaoRepository {
             row.id_doacao
         ));
     }
+
+    public async buscarTodos(): Promise<Doacao[]> {
+        // Ordenamos do maior ID para o menor, garantindo que os mais novos venham primeiro
+        const query = `SELECT * FROM doacao ORDER BY id_doacao DESC`;
+        const { rows } = await db.query(query);
+
+        return rows.map(row => new Doacao(
+            new Date(row.data_doacao),
+            row.observacoes,
+            row.id_doador,
+            row.id_doacao // ID gerado pelo banco
+        ));
+    }
 }

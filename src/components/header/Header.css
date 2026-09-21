@@ -1,265 +1,155 @@
-/* =====================================================
-   VARIÁVEIS GLOBAIS
-===================================================== */
-
-:root {
-    --cor-principal: #2f855a;
-    --cor-principal-hover: #276749;
-
-    --cor-fundo-header: #ffffff;
-    --cor-fundo-submenu: #ffffff;
-
-    --cor-texto: #333333;
-    --cor-texto-menu: #444444;
-    --cor-texto-branco: #ffffff;
-
-    --cor-borda: #eeeeee;
-
-    --tamanho-header: 70px;
-    --largura-maxima: 1200px;
-
-    --espacamento-menu: 30px;
-    --espacamento-submenu: 12px;
-
-    --sombra-header: 0 2px 8px rgba(0, 0, 0, 0.08);
-    --sombra-submenu: 0 4px 12px rgba(0, 0, 0, 0.12);
-}
-
-
-/* =====================================================
-   HEADER
-===================================================== */
-
+/* --- CONTAINER PRINCIPAL DO HEADER --- */
 .header {
+    background-color: #ffffff;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.06);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
     width: 100%;
-    height: var(--tamanho-header);
-
-    background-color: var(--cor-fundo-header);
-    border-bottom: 1px solid var(--cor-borda);
-
-    box-shadow: var(--sombra-header);
 }
-
-
-/* =====================================================
-   CONTAINER PRINCIPAL
-===================================================== */
 
 .header-container {
-    max-width: var(--largura-maxima);
-    height: 100%;
-
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
-
+    height: 70px;
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
 }
 
-
-/* =====================================================
-   LOGO
-===================================================== */
-
+/* --- LOGO VIVAPET COM ANIMAÇÃO --- */
 .logo a {
-    color: var(--cor-principal);
-
-    font-size: 22px;
-    font-weight: bold;
-
+    font-size: 1.8rem;
+    font-weight: 800;
     text-decoration: none;
-}
-
-
-/* =====================================================
-   MENU PRINCIPAL
-===================================================== */
-
-.menu {
-    height: 100%;
-
+    /* Efeito de Gradiente usando as cores do projeto */
+    background: linear-gradient(45deg, var(--roxo-viva, #6c5ce7), var(--coral-viva, #ff6b6b));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     display: flex;
     align-items: center;
-    gap: var(--espacamento-menu);
+    gap: 8px;
+    transition: transform 0.3s ease;
 }
 
+/* Animação tipo "Batida de Coração / Alegria de Pet" no Hover */
+.logo a:hover {
+    transform: scale(1.05);
+    animation: pulso-pet 1s infinite alternate ease-in-out;
+}
+
+@keyframes pulso-pet {
+    0% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1.08) rotate(-1deg);
+    }
+}
+
+/* --- NAVEGAÇÃO E MENUS PRINCIPAIS --- */
+.menu {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
 
 .menu-item {
     position: relative;
-
-    height: 100%;
-
-    display: flex;
-    align-items: center;
-
-    color: var(--cor-texto-menu);
-
-    font-size: 15px;
-    font-weight: 500;
-
+    padding: 25px 0;
+    /* Aumenta a área de hover para não perder o foco do mouse */
     cursor: pointer;
 }
 
-
-/* Efeito ao passar o mouse pelo menu */
-
-.menu-item:hover {
-    color: var(--cor-principal);
+.menu-item>span {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #444;
+    transition: color 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
+/* Seta para baixo indicando que tem menu */
+.menu-item>span::after {
+    content: "▾";
+    font-size: 0.8rem;
+    color: var(--texto-mutado, #999);
+    transition: transform 0.3s ease;
+}
 
-/* =====================================================
-   SUBMENU
-===================================================== */
+.menu-item:hover>span {
+    color: var(--roxo-viva, #6c5ce7);
+}
 
+.menu-item:hover>span::after {
+    transform: rotate(180deg);
+    color: var(--roxo-viva, #6c5ce7);
+}
+
+/* --- SUBMENUS (DROPDOWN) --- */
 .submenu {
     position: absolute;
-
-    top: 100%;
-    left: 0;
-
-    min-width: 230px;
-
-    display: none;
-    flex-direction: column;
-
-    background-color: var(--cor-fundo-submenu);
-
-    border: 1px solid var(--cor-borda);
-    border-radius: 6px;
-
-    box-shadow: var(--sombra-submenu);
-
-    z-index: 10;
-}
-
-
-/* Exibe o submenu ao passar o mouse */
-
-.menu-item:hover .submenu {
+    top: 70px;
+    /* Logo abaixo do header */
+    left: 50%;
+    transform: translateX(-50%) translateY(15px);
+    background-color: #ffffff;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    min-width: 220px;
     display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+
+    /* Efeito de esconder/mostrar suave */
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border-top: 3px solid var(--roxo-viva, #6c5ce7);
 }
 
+/* Ativa o submenu no hover do item pai */
+.menu-item:hover .submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
 
-/* Links do submenu */
-
+/* Links dentro do Submenu */
 .submenu a {
-    padding: var(--espacamento-submenu);
-
-    color: var(--cor-texto);
-
-    font-size: 14px;
-
     text-decoration: none;
+    color: #555;
+    padding: 12px 20px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: background-color 0.2s, color 0.2s, padding-left 0.2s;
 }
-
-
-/* Efeito dos links do submenu */
 
 .submenu a:hover {
-    background-color: #f4f4f4;
-
-    color: var(--cor-principal);
+    background-color: rgba(108, 92, 231, 0.05);
+    /* Fundo roxo bem clarinho */
+    color: var(--roxo-viva, #6c5ce7);
+    padding-left: 25px;
+    /* Efeito de leve deslocamento para a direita */
 }
 
-
-/* =====================================================
-   BOTÃO DOAÇÕES
-===================================================== */
-
-.donations a {
-    padding: 10px 18px;
-
-    background-color: var(--cor-principal);
-    color: var(--cor-texto-branco);
-
-    border-radius: 6px;
-
-    font-size: 14px;
+/* --- BOTÃO DE DESTAQUE LATERAL (OPCIONAL/EXTRA) --- */
+.menu-destaque a {
+    background-color: var(--verde-viva, #2ecc71);
+    color: #144627;
+    padding: 10px 20px;
+    border-radius: 20px;
     font-weight: bold;
-
     text-decoration: none;
+    transition: background-color 0.3s, transform 0.2s;
+    display: inline-block;
 }
 
-
-.donations a:hover {
-    background-color: var(--cor-principal-hover);
-}
-
-
-/* =====================================================
-   RESPONSIVIDADE
-===================================================== */
-
-@media (max-width: 768px) {
-
-    .header {
-        height: auto;
-    }
-
-    .header-container {
-        min-height: var(--tamanho-header);
-
-        flex-wrap: wrap;
-
-        padding-top: 15px;
-        padding-bottom: 15px;
-    }
-
-    .logo {
-        width: 100%;
-        text-align: center;
-    }
-
-    .menu {
-        width: 100%;
-
-        justify-content: center;
-
-        gap: 15px;
-
-        order: 3;
-    }
-
-    .donations {
-        display: none;
-    }
-
-    .menu-item {
-        height: 40px;
-
-        font-size: 14px;
-    }
-
-    .submenu {
-        left: 50%;
-
-        transform: translateX(-50%);
-    }
-}
-
-
-@media (max-width: 480px) {
-
-    .header-container {
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .logo {
-        width: auto;
-    }
-
-    .donations {
-        display: none;
-    }
-
-    .menu {
-        flex-wrap: wrap;
-    }
-
-    .submenu {
-        min-width: 210px;
-    }
+.menu-destaque a:hover {
+    background-color: #27ae60;
+    transform: scale(1.05);
 }

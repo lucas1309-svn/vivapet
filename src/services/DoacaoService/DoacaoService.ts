@@ -105,4 +105,8 @@ export class DoacaoService {
 
         return doacao;
     }
+
+    public async listarTodasDoacoes() {
+        return this.doacaoRepository.buscarTodos();
+    }
 }

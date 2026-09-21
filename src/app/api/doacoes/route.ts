@@ -6,6 +6,10 @@ export async function POST(req: Request) {
     return doacaoController.cadastrar(req);
 }
 
+
+export async function GET(req: Request) {
+    return doacaoController.listarTodos(req); 
+}
 /*
 A entidade de Doação funciona como um registro transacional imutável (você registra a doação 
 junto com os itens para abater o estoque, mas não fica editando doações passadas para não 

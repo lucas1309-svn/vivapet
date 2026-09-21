@@ -83,4 +83,15 @@ export class DoacaoController {
             return NextResponse.json({ error: message }, { status: 500 });
         }
     }
+
+    public async listarTodos(req: Request) {
+        try {
+            // Chama o Service para buscar todas as doações do banco
+            const doacoes = await this.doacaoService.listarTodasDoacoes();
+            return NextResponse.json(doacoes, { status: 200 });
+        } catch (error: unknown) {
+            const message = error instanceof Error ? error.message : "Erro ao buscar doações.";
+            return NextResponse.json({ error: message }, { status: 500 });
+        }
+    }
 }

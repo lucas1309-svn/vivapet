@@ -1,13 +1,10 @@
-import Home from "@/components/Home/Home";
-import "./globals.css";
+import Dashboard from "@/components/Dashboard/Dashsboard";
 
-export default function Principal() {
+export default function Home() {
+
   return (
-
     <div>
-      
-      <Home />
-      
+      <Dashboard />
     </div>
   );
 }
