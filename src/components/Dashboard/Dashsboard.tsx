@@ -107,7 +107,7 @@ export default function DashboardPrincipal() {
             {/* SEÇÃO: BOAS VINDAS */}
             <section className="dashboard-header">
                 <h1 className="titulo-principal" style={{ fontSize: "2.5rem" }}>
-                    Bem-vindo ao VivaPet!
+                    Bem-vindo!
                 </h1>
                 <p>Sistema Integrado de Gerenciamento de Abrigo de Animais.</p>
             </section>

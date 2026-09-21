@@ -23,6 +23,7 @@ export default function Header() {
                         <span>Abrigo</span>
                         <div className="submenu">
                             <Link href="/animais">Gestão de Animais</Link>
+                            <Link href="/doadores">Gestão de Doadores</Link>
                             <Link href="/necessidades">Prontuários e Necessidades</Link>
                         </div>
                     </div>
